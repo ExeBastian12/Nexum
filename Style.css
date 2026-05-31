@@ -1,12 +1,9 @@
 :root {
     --bg: #1d102b;
-    --bg-deep: #170b24;
     --panel: rgba(255, 255, 255, 0.085);
-    --panel-strong: rgba(255, 255, 255, 0.12);
     --line: rgba(255, 255, 255, 0.15);
     --rose: #fda4af;
     --rose-bright: #fb7185;
-    --pink: #ec4899;
     --fuchsia: #d946ef;
     --violet: #a78bfa;
     --white: #fff7fb;
@@ -25,7 +22,9 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
     background: var(--bg);
 }
 
@@ -148,7 +147,6 @@ button {
 .brand-title,
 .micro-label,
 .modal-eyebrow,
-.small-note,
 .meter-head,
 .quest-complete,
 .letter-envelope span:last-child {
@@ -211,7 +209,7 @@ button {
     width: min(100%, 980px);
     height: 100%;
     margin: 0 auto;
-    padding: 12px 18px 18px;
+    padding: 28px 18px 32px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -240,19 +238,19 @@ button {
 
 .chapter-title {
     max-width: 760px;
-    margin: 13px 0 0;
+    margin: 0 0 0.36rem;
     font-family: "Playfair Display", Georgia, serif;
-    font-size: clamp(30px, 5.2vw, 58px);
-    line-height: 1.06;
+    font-size: clamp(1.7rem, 4.2vw, 2.4rem);
+    line-height: 1.08;
     letter-spacing: -0.035em;
 }
 
 .chapter-description {
     max-width: 650px;
-    margin: 13px 0 0;
+    margin: 0.32rem 0 1rem;
     color: var(--muted);
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 0.78rem;
+    line-height: 1.32;
 }
 
 .glass-card {
@@ -264,10 +262,10 @@ button {
 }
 
 .intro-card {
-    width: min(100%, 580px);
-    gap: 14px;
-    margin-top: 20px;
-    padding: 16px;
+    width: min(100%, 680px);
+    gap: 20px;
+    margin: 0.7rem 0 1rem;
+    padding: 20px 22px;
     text-align: left;
 }
 
@@ -287,11 +285,11 @@ button {
     margin: 0;
     color: var(--muted);
     font-size: 14px;
-    line-height: 1.55;
+    line-height: 1.75;
 }
 
 .intro-copy .micro-label {
-    margin-bottom: 5px;
+    margin-bottom: 9px;
     color: rgba(254, 205, 211, 0.75);
 }
 
@@ -300,13 +298,13 @@ button {
     align-items: center;
     justify-content: center;
     gap: 9px;
-    margin-top: 19px;
+    margin-top: 0.9rem;
     border: 1px solid rgba(255, 228, 236, 0.26);
     border-radius: 999px;
-    padding: 13px 19px;
+    padding: 0.64rem 1.32rem;
     background: linear-gradient(90deg, #f43f5e, #d946ef);
     color: white;
-    font-size: 14px;
+    font-size: 0.82rem;
     font-weight: 700;
     box-shadow: 0 15px 35px rgba(91, 23, 78, 0.28);
     transition: 0.2s ease;
@@ -328,65 +326,184 @@ button {
 }
 
 .small-note {
-    margin: 13px 0 0;
+    margin: 0.8rem 0 0;
     color: var(--soft);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .game-board {
     position: relative;
     width: min(100%, 760px);
-    height: min(46vh, 390px);
-    min-height: 302px;
+    height: min(49vh, 420px);
+    min-height: 326px;
     margin-top: 17px;
     overflow: hidden;
 }
 
-.counter-badge {
+.heart-hud {
     position: absolute;
-    z-index: 3;
-    left: 14px;
-    top: 14px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 7px 11px;
-    background: rgba(0, 0, 0, 0.1);
-    color: rgba(255, 228, 236, 0.78);
-    font-size: 12px;
-    backdrop-filter: blur(10px);
+    z-index: 5;
+    top: 13px;
+    right: 13px;
+    left: 13px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
 }
 
-.catch-heart {
+.heart-stat {
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    padding: 7px 9px;
+    background: rgba(0, 0, 0, 0.13);
+    backdrop-filter: blur(12px);
+}
+
+.heart-stat span,
+.heart-stat strong {
+    display: block;
+}
+
+.heart-stat span {
+    color: rgba(255, 228, 236, 0.55);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.heart-stat strong {
+    margin-top: 2px;
+    color: rgba(255, 247, 251, 0.92);
+    font-size: 16px;
+}
+
+.heart-play-area {
     position: absolute;
     z-index: 2;
-    padding: 0;
-    color: #fda4af;
+    inset: 67px 0 92px;
+}
+
+.rush-heart {
+    position: absolute;
+    padding: 7px;
+    border-radius: 999px;
     background: transparent;
-    filter: drop-shadow(0 8px 9px rgba(57, 12, 55, 0.28));
-    animation: heartFloat 2.6s ease-in-out infinite;
-    transition: transform 0.18s ease;
+    color: #fda4af;
+    filter: drop-shadow(0 9px 9px rgba(57, 12, 55, 0.3));
+    line-height: 1;
+    touch-action: manipulation;
+    transform: translate(-50%, -50%);
+    animation: rushHeartEnter 0.2s ease both, rushHeartPulse 0.72s ease-in-out infinite alternate;
 }
 
-.catch-heart:hover {
-    transform: scale(1.22);
+.rush-heart:hover {
+    filter: drop-shadow(0 10px 13px rgba(57, 12, 55, 0.4));
 }
 
-.catch-heart.heart-caught {
-    animation: heartCaught 0.28s ease forwards;
+.rush-heart.gold {
+    color: #fde68a;
+    filter: drop-shadow(0 0 13px rgba(253, 230, 138, 0.75));
 }
+
+.rush-heart.trap {
+    color: #a78bfa;
+    opacity: 0.9;
+    animation: rushHeartEnter 0.2s ease both, trapShake 0.48s ease-in-out infinite alternate;
+}
+
+.rush-heart.trap::after {
+    position: absolute;
+    top: 10%;
+    left: 48%;
+    width: 3px;
+    height: 77%;
+    border-radius: 99px;
+    background: rgba(29, 16, 43, 0.82);
+    content: '';
+    transform: rotate(19deg);
+}
+
+.rush-heart.is-caught {
+    pointer-events: none;
+    animation: heartCaught 0.2s ease forwards;
+}
+
+.heart-legend {
+    position: absolute;
+    z-index: 4;
+    right: 14px;
+    bottom: 61px;
+    left: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255, 247, 251, 0.68);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.heart-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.legend-heart {
+    font-size: 15px;
+}
+
+.legend-heart.normal { color: #fda4af; }
+.legend-heart.gold { color: #fde68a; }
+.legend-heart.trap { color: #a78bfa; }
 
 .board-message {
     position: absolute;
+    z-index: 4;
     right: 14px;
-    bottom: 14px;
+    bottom: 12px;
     left: 14px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 17px;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.045);
-    color: rgba(255, 247, 251, 0.66);
-    font-size: 12px;
-    line-height: 1.55;
+    border-radius: 15px;
+    padding: 9px 12px;
+    background: rgba(255, 255, 255, 0.052);
+    color: rgba(255, 247, 251, 0.72);
+    font-size: 11px;
+    line-height: 1.45;
     text-align: left;
+}
+
+.heart-start-button {
+    position: absolute;
+    z-index: 6;
+    top: 50%;
+    left: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid rgba(255, 228, 236, 0.28);
+    border-radius: 999px;
+    padding: 0.72rem 1.2rem;
+    background: linear-gradient(90deg, #f43f5e, #d946ef);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 700;
+    box-shadow: 0 15px 35px rgba(91, 23, 78, 0.28);
+    transform: translate(-50%, -50%);
+    transition: 0.2s ease;
+}
+
+.heart-start-button:hover {
+    transform: translate(-50%, -54%) scale(1.03);
+}
+
+.heart-start-button span {
+    font-size: 20px;
+    line-height: 12px;
 }
 
 .memory-grid {
@@ -462,16 +579,16 @@ button {
     display: grid;
     width: min(100%, 680px);
     gap: 10px;
-    margin-top: 18px;
+    margin: 0.7rem 0 1rem;
 }
 
 .quiz-option {
     border: 1px solid var(--line);
     border-radius: 17px;
-    padding: 12px 15px;
+    padding: 0.64rem 1rem;
     background: rgba(255, 255, 255, 0.06);
     color: rgba(255, 247, 251, 0.77);
-    font-size: 14px;
+    font-size: 0.84rem;
     line-height: 1.45;
     text-align: left;
     transition: 0.18s ease;
@@ -486,10 +603,10 @@ button {
 
 .quiz-reply {
     width: min(100%, 680px);
-    margin-top: 14px;
+    margin-top: 1rem;
     border: 1px solid rgba(255, 228, 236, 0.13);
     border-radius: 17px;
-    padding: 12px 14px;
+    padding: 0.84rem 1.1rem;
     background: rgba(255, 228, 236, 0.055);
     color: rgba(255, 247, 251, 0.79);
     font-size: 14px;
@@ -743,13 +860,105 @@ button {
     50% { transform: translateY(-18px) rotate(12deg); opacity: 0.55; }
 }
 
-@keyframes heartFloat {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.15); }
+@keyframes rushHeartEnter {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes rushHeartPulse {
+    from { transform: translate(-50%, -50%) scale(0.94); }
+    to { transform: translate(-50%, -50%) scale(1.16); }
+}
+
+@keyframes trapShake {
+    from { transform: translate(-50%, -50%) rotate(-8deg) scale(0.96); }
+    to { transform: translate(-50%, -50%) rotate(8deg) scale(1.08); }
 }
 
 @keyframes heartCaught {
-    to { opacity: 0; transform: scale(2) rotate(20deg); }
+    to { opacity: 0; transform: translate(-50%, -50%) scale(2) rotate(20deg); }
+}
+
+/* Chapter-specific compact sizing */
+.chapter .pill {
+    margin-bottom: 0.6rem;
+    padding: 0.24em 0.7em;
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+}
+
+/* Optional layout hooks retained for compatibility with related markup */
+.cover-content,
+.chapter-content {
+    max-width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.cover-stage .chapter-inner,
+.chapter .chapter-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+header .pill {
+    padding: 0.36em 0.7em;
+    font-size: 0.62rem;
+}
+
+[class*="GlassCard"],
+.memory-cards {
+    margin-top: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.memory-cards button {
+    height: 5.6rem;
+}
+
+.hearts-collected-badge {
+    padding: 0.28rem 0.64rem;
+    font-size: 0.74rem;
+}
+
+.love-meter button {
+    width: 4.2rem;
+    height: 4.2rem;
+}
+
+.quiz-reply-label {
+    font-size: 0.78rem;
+}
+
+.quiz-reply-content p {
+    font-size: 0.82rem;
+    line-height: 1.42;
+}
+
+.letter-page-title {
+    margin-bottom: 0.5rem;
+    font-size: clamp(1.62rem, 3.8vw, 2.2rem);
+}
+
+.letter-page-body {
+    margin-bottom: 0.8rem;
+    font-size: 0.82rem;
+    line-height: 1.48;
+}
+
+/* Existing page-scroll behavior retained */
+main {
+    scroll-snap-type: y mandatory;
+}
+
+main section {
+    min-height: auto;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    scroll-snap-align: start;
 }
 
 @media (max-width: 640px) {
@@ -771,22 +980,16 @@ button {
     }
 
     .chapter {
-        padding: 8px 14px 15px;
+        padding-right: 14px;
+        padding-left: 14px;
     }
 
     .chapter-title {
-        font-size: clamp(28px, 9vw, 40px);
+        font-size: clamp(1.48rem, 3.6vw, 2rem);
     }
 
     .chapter-description {
-        font-size: 13px;
-        line-height: 1.58;
-    }
-
-    .intro-card {
-        gap: 11px;
-        margin-top: 16px;
-        padding: 13px;
+        font-size: 0.74rem;
     }
 
     .gift-icon {
@@ -797,7 +1000,6 @@ button {
     }
 
     .intro-copy p,
-    .quiz-option,
     .quiz-reply,
     .meter-message {
         font-size: 13px;
@@ -809,7 +1011,16 @@ button {
     }
 
     .board-message {
-        font-size: 11px;
+        font-size: 10px;
+    }
+
+    .heart-legend {
+        gap: 8px;
+        font-size: 9px;
+    }
+
+    .heart-stat strong {
+        font-size: 14px;
     }
 
     .memory-grid {
@@ -838,25 +1049,9 @@ button {
 }
 
 @media (max-height: 700px) {
-    .chapter-title {
-        margin-top: 9px;
-        font-size: clamp(26px, 4.7vw, 45px);
-    }
-
-    .chapter-description {
-        margin-top: 8px;
-        line-height: 1.48;
-    }
-
-    .intro-card,
     .meter-card,
-    .quiz-options,
     .memory-grid {
         margin-top: 12px;
-    }
-
-    .primary-btn {
-        margin-top: 13px;
     }
 
     .game-board {
@@ -867,422 +1062,1663 @@ button {
     .memory-card {
         height: 94px;
     }
+}
 
-    .small-note {
-        margin-top: 8px;
+
+/* =========================================================
+   CHAPTER 01 · MODERN HEART RUSH ARENA
+   Scoped overrides only. Other chapters remain untouched.
+   ========================================================= */
+.game-board-shell {
+    width: min(100%, 860px);
+    margin-top: 16px;
+}
+
+.heart-challenge-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 3px 9px;
+}
+
+.challenge-status,
+.challenge-rules,
+.challenge-rules span {
+    display: flex;
+    align-items: center;
+}
+
+.challenge-status {
+    gap: 7px;
+    color: rgba(255, 228, 236, 0.68);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 228, 236, 0.34);
+    box-shadow: 0 0 0 0 rgba(251, 113, 133, 0);
+}
+
+.live-dot.is-live {
+    background: #fb7185;
+    animation: livePulse 1.35s ease-out infinite;
+}
+
+.challenge-rules {
+    gap: 12px;
+    color: rgba(255, 247, 251, 0.62);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.challenge-rules span {
+    gap: 4px;
+}
+
+.rule-dot {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 11px;
+}
+
+.rule-dot.normal { color: #fda4af; }
+.rule-dot.gold { color: #fde68a; }
+.rule-dot.trap { color: #c4b5fd; }
+
+.hearts-board {
+    width: 100%;
+    height: min(53vh, 500px);
+    min-height: 420px;
+    margin-top: 0;
+    isolation: isolate;
+    overflow: hidden;
+    border-color: rgba(255, 228, 236, 0.2);
+    border-radius: 31px;
+    background:
+        linear-gradient(145deg, rgba(54, 28, 72, 0.76), rgba(29, 14, 45, 0.58)),
+        rgba(255, 255, 255, 0.065);
+    box-shadow:
+        0 28px 80px rgba(11, 3, 22, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.hearts-board::before,
+.hearts-board::after {
+    position: absolute;
+    z-index: -1;
+    border-radius: 999px;
+    content: '';
+    pointer-events: none;
+    filter: blur(54px);
+}
+
+.hearts-board::before {
+    width: 260px;
+    height: 260px;
+    top: -100px;
+    left: -80px;
+    background: rgba(251, 113, 133, 0.19);
+    animation: arenaGlowOne 8s ease-in-out infinite alternate;
+}
+
+.hearts-board::after {
+    width: 290px;
+    height: 290px;
+    right: -110px;
+    bottom: -130px;
+    background: rgba(217, 70, 239, 0.17);
+    animation: arenaGlowTwo 9s ease-in-out infinite alternate;
+}
+
+.hearts-board.is-pressure {
+    animation: pressureGlow 0.8s ease-in-out infinite alternate;
+}
+
+.hearts-board.is-complete {
+    animation: arenaComplete 0.65s ease both;
+}
+
+.heart-arena-bg,
+.arena-grid,
+.arena-vignette,
+.arena-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.heart-arena-bg {
+    z-index: 0;
+    overflow: hidden;
+}
+
+.arena-grid {
+    opacity: 0.26;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-position: center;
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
+    animation: gridDrift 18s linear infinite;
+}
+
+.arena-vignette {
+    background: radial-gradient(circle at center, transparent 18%, rgba(12, 4, 22, 0.34) 100%);
+}
+
+.arena-orb {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(34px);
+    opacity: 0.52;
+}
+
+.arena-orb.orb-one {
+    width: 190px;
+    height: 190px;
+    top: 22%;
+    left: 7%;
+    background: rgba(251, 113, 133, 0.18);
+    animation: orbFloatOne 8.2s ease-in-out infinite alternate;
+}
+
+.arena-orb.orb-two {
+    width: 230px;
+    height: 230px;
+    right: 8%;
+    bottom: 6%;
+    background: rgba(167, 139, 250, 0.16);
+    animation: orbFloatTwo 9.6s ease-in-out infinite alternate;
+}
+
+.arena-orb.orb-three {
+    width: 150px;
+    height: 150px;
+    top: 44%;
+    left: 43%;
+    background: rgba(217, 70, 239, 0.11);
+    animation: orbFloatThree 7.4s ease-in-out infinite alternate;
+}
+
+.arena-particles span {
+    position: absolute;
+    width: var(--particle-size);
+    height: var(--particle-size);
+    top: var(--particle-top);
+    left: var(--particle-left);
+    border-radius: 999px;
+    background: rgba(255, 228, 236, 0.42);
+    box-shadow: 0 0 14px rgba(253, 164, 175, 0.28);
+    animation: arenaParticle var(--particle-duration) ease-in-out var(--particle-delay) infinite;
+}
+
+.heart-hud {
+    position: absolute;
+    z-index: 10;
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+}
+
+.heart-stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 17px;
+    padding: 9px 11px;
+    background: rgba(16, 6, 28, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(18px);
+    transition: border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+}
+
+.heart-stat-icon {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 11px;
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.2), rgba(217, 70, 239, 0.11));
+    color: rgba(255, 228, 236, 0.86);
+    font-size: 14px;
+}
+
+.heart-stat-copy,
+.heart-stat-copy span,
+.heart-stat-copy strong {
+    display: block;
+}
+
+.heart-stat-copy {
+    min-width: 0;
+}
+
+.heart-stat-copy span {
+    color: rgba(255, 228, 236, 0.52);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.heart-stat-copy strong {
+    margin-top: 2px;
+    color: rgba(255, 247, 251, 0.96);
+    font-size: 18px;
+    line-height: 1;
+}
+
+.heart-stat-copy small {
+    color: rgba(255, 247, 251, 0.54);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.heart-stat.is-danger {
+    border-color: rgba(251, 113, 133, 0.52);
+    background: rgba(244, 63, 94, 0.13);
+    animation: statWarning 0.8s ease-in-out infinite alternate;
+}
+
+.heart-stat.is-hot {
+    border-color: rgba(253, 230, 138, 0.38);
+    background: rgba(253, 230, 138, 0.075);
+    transform: translateY(-2px);
+}
+
+.heart-progress-track {
+    position: absolute;
+    z-index: 10;
+    top: 84px;
+    right: 20px;
+    left: 20px;
+    height: 3px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.085);
+}
+
+.heart-progress-track span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #fb7185, #d946ef, #a78bfa);
+    box-shadow: 0 0 15px rgba(217, 70, 239, 0.56);
+    transition: width 0.28s ease;
+}
+
+.heart-play-area {
+    position: absolute;
+    z-index: 4;
+    inset: 90px 0 82px;
+    overflow: hidden;
+}
+
+.arena-center-visual {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 214px;
+    height: 214px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.arena-ring,
+.arena-center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+}
+
+.arena-ring {
+    border: 1px solid rgba(255, 228, 236, 0.11);
+}
+
+.arena-ring.ring-one {
+    width: 78px;
+    height: 78px;
+    animation: ringBreath 3.2s ease-in-out infinite;
+}
+
+.arena-ring.ring-two {
+    width: 142px;
+    height: 142px;
+    border-style: dashed;
+    animation: ringSpin 18s linear infinite;
+}
+
+.arena-ring.ring-three {
+    width: 208px;
+    height: 208px;
+    opacity: 0.55;
+    animation: ringBreathLarge 4.8s ease-in-out infinite;
+}
+
+.arena-center-dot {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(255, 228, 236, 0.12);
+    background: rgba(253, 164, 175, 0.08);
+    color: rgba(253, 164, 175, 0.3);
+    font-size: 22px;
+    box-shadow: 0 0 30px rgba(251, 113, 133, 0.1);
+    animation: centerBreath 2.8s ease-in-out infinite;
+}
+
+.heart-start-panel {
+    position: absolute;
+    z-index: 12;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    width: min(calc(100% - 40px), 385px);
+    padding: 20px 22px;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255, 228, 236, 0.14);
+    border-radius: 25px;
+    background: rgba(22, 8, 37, 0.54);
+    box-shadow: 0 22px 54px rgba(12, 3, 23, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.055);
+    text-align: center;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(24px);
+    animation: startPanelEnter 0.42s ease both;
+}
+
+.start-heart-visual {
+    position: relative;
+    display: grid;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 9px;
+    place-items: center;
+}
+
+.start-heart-halo,
+.start-heart-core {
+    position: absolute;
+    border-radius: 999px;
+}
+
+.start-heart-halo {
+    width: 62px;
+    height: 62px;
+    border: 1px solid rgba(253, 164, 175, 0.22);
+    background: rgba(253, 164, 175, 0.08);
+    box-shadow: 0 0 30px rgba(251, 113, 133, 0.18);
+    animation: startHalo 2s ease-in-out infinite;
+}
+
+.start-heart-core {
+    color: #fda4af;
+    font-size: 30px;
+    filter: drop-shadow(0 0 14px rgba(251, 113, 133, 0.45));
+    animation: startHeartBeat 1.5s ease-in-out infinite;
+}
+
+.start-spark {
+    position: absolute;
+    color: #fde68a;
+    font-size: 11px;
+    animation: sparkTwinkle 1.8s ease-in-out infinite;
+}
+
+.start-spark.spark-one { top: 2px; right: 2px; }
+.start-spark.spark-two { right: -4px; bottom: 8px; animation-delay: 0.5s; }
+.start-spark.spark-three { bottom: 0; left: -1px; animation-delay: 0.9s; }
+
+.heart-start-kicker {
+    margin: 0 0 5px;
+    color: rgba(253, 230, 138, 0.7);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.heart-start-panel h2 {
+    margin: 0;
+    color: rgba(255, 247, 251, 0.96);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 24px;
+    line-height: 1.05;
+}
+
+.heart-start-panel p:not(.heart-start-kicker) {
+    margin: 8px 0 0;
+    color: rgba(255, 247, 251, 0.66);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.heart-start-button {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    border: 1px solid rgba(255, 228, 236, 0.28);
+    border-radius: 999px;
+    padding: 0.72rem 1.16rem 0.72rem 1.28rem;
+    background: linear-gradient(90deg, #f43f5e, #d946ef);
+    color: #fff;
+    font-size: 0.76rem;
+    font-weight: 700;
+    box-shadow: 0 14px 30px rgba(91, 23, 78, 0.35);
+    transform: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.heart-start-button:hover {
+    filter: brightness(1.09);
+    transform: translateY(-3px) scale(1.025);
+}
+
+.heart-start-button b {
+    font-size: 20px;
+    line-height: 10px;
+}
+
+.heart-bottom-panel {
+    position: absolute;
+    z-index: 10;
+    right: 15px;
+    bottom: 13px;
+    left: 15px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.heart-message-wrap,
+.heart-mini-tip {
+    border: 1px solid rgba(255, 255, 255, 0.095);
+    border-radius: 15px;
+    background: rgba(12, 4, 23, 0.18);
+    backdrop-filter: blur(16px);
+}
+
+.heart-message-wrap {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 11px;
+}
+
+.message-pulse {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #fda4af;
+    box-shadow: 0 0 13px rgba(253, 164, 175, 0.72);
+    animation: messagePulse 1.5s ease-in-out infinite;
+}
+
+.heart-game-message {
+    margin: 0;
+    overflow: hidden;
+    color: rgba(255, 247, 251, 0.72);
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.heart-mini-tip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 11px;
+    color: rgba(255, 247, 251, 0.58);
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.heart-mini-tip span {
+    color: #fde68a;
+}
+
+.rush-heart {
+    position: absolute;
+    z-index: 15;
+    display: grid;
+    width: calc(var(--heart-size) + 22px);
+    height: calc(var(--heart-size) + 22px);
+    padding: 0;
+    place-items: center;
+    border-radius: 999px;
+    background: transparent;
+    color: #fda4af;
+    line-height: 1;
+    touch-action: none;
+    transform: translate(-50%, -50%);
+    animation: heartWander var(--heart-flight, 1000ms) ease-in-out infinite alternate;
+}
+
+.rush-heart-aura,
+.rush-heart-core,
+.rush-heart-spark {
+    position: absolute;
+    pointer-events: none;
+}
+
+.rush-heart-aura {
+    width: calc(var(--heart-size) + 12px);
+    height: calc(var(--heart-size) + 12px);
+    border: 1px solid rgba(253, 164, 175, 0.26);
+    border-radius: 999px;
+    background: rgba(253, 164, 175, 0.08);
+    box-shadow: 0 0 24px rgba(251, 113, 133, 0.18);
+    animation: targetAura 1.1s ease-in-out infinite;
+}
+
+.rush-heart-core {
+    color: inherit;
+    font-size: var(--heart-size);
+    filter: drop-shadow(0 7px 11px rgba(57, 12, 55, 0.35));
+    animation: targetHeartBeat 0.78s ease-in-out infinite alternate;
+}
+
+.rush-heart-spark {
+    color: rgba(255, 247, 251, 0.74);
+    font-size: 11px;
+    opacity: 0;
+    animation: targetSpark 1.2s ease-in-out infinite;
+}
+
+.rush-heart-spark.spark-one { top: 4px; right: 4px; }
+.rush-heart-spark.spark-two { bottom: 7px; left: 4px; animation-delay: 0.48s; }
+
+.rush-heart.gold {
+    color: #fde68a;
+}
+
+.rush-heart.gold .rush-heart-aura {
+    border-color: rgba(253, 230, 138, 0.5);
+    background: rgba(253, 230, 138, 0.13);
+    box-shadow: 0 0 34px rgba(253, 230, 138, 0.38);
+}
+
+.rush-heart.gold .rush-heart-spark {
+    color: #fde68a;
+    opacity: 1;
+}
+
+.rush-heart.trap {
+    color: #c4b5fd;
+    opacity: 0.96;
+    animation: trapWander var(--heart-flight, 1000ms) ease-in-out infinite alternate;
+}
+
+.rush-heart.trap .rush-heart-aura {
+    border-color: rgba(196, 181, 253, 0.32);
+    background: rgba(167, 139, 250, 0.1);
+    box-shadow: 0 0 24px rgba(167, 139, 250, 0.22);
+    animation: trapAura 0.54s ease-in-out infinite alternate;
+}
+
+.rush-heart.trap::after {
+    top: 20%;
+    left: 50%;
+    width: 3px;
+    height: 59%;
+    background: rgba(29, 16, 43, 0.92);
+    transform: rotate(22deg);
+}
+
+.rush-heart.is-caught,
+.rush-heart.trap.is-caught {
+    pointer-events: none;
+    animation: targetCaught 0.31s ease forwards;
+}
+
+.heart-feedback {
+    position: absolute;
+    z-index: 18;
+    color: rgba(255, 247, 251, 0.9);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    text-shadow: 0 5px 18px rgba(12, 4, 23, 0.52);
+    transform: translate(-50%, -50%);
+    animation: feedbackRise 0.72s ease forwards;
+}
+
+.heart-feedback.gold { color: #fde68a; }
+.heart-feedback.trap { color: #c4b5fd; }
+.heart-feedback.missed { color: rgba(255, 247, 251, 0.55); }
+.heart-feedback.dodge { color: rgba(196, 181, 253, 0.8); }
+
+@keyframes livePulse {
+    0% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.45); }
+    100% { box-shadow: 0 0 0 9px rgba(251, 113, 133, 0); }
+}
+
+@keyframes arenaGlowOne {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(72px, 52px, 0) scale(1.12); }
+}
+
+@keyframes arenaGlowTwo {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(-66px, -38px, 0) scale(1.14); }
+}
+
+@keyframes gridDrift {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 42px 42px, 42px 42px; }
+}
+
+@keyframes orbFloatOne {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(82px, 52px, 0); }
+}
+
+@keyframes orbFloatTwo {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-88px, -46px, 0); }
+}
+
+@keyframes orbFloatThree {
+    from { transform: translate3d(-30px, 12px, 0); }
+    to { transform: translate3d(56px, -42px, 0); }
+}
+
+@keyframes arenaParticle {
+    0%, 100% { opacity: 0.18; transform: translateY(0) scale(0.75); }
+    50% { opacity: 0.78; transform: translateY(-17px) scale(1.18); }
+}
+
+@keyframes ringSpin {
+    from { transform: translate(-50%, -50%) rotate(0); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ringBreath {
+    0%, 100% { opacity: 0.34; transform: translate(-50%, -50%) scale(0.86); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.18); }
+}
+
+@keyframes ringBreathLarge {
+    0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.9); }
+    50% { opacity: 0.55; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+@keyframes centerBreath {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.92); }
+    50% { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes startPanelEnter {
+    from { opacity: 0; transform: translate(-50%, -44%) scale(0.96); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes startHalo {
+    0%, 100% { opacity: 0.5; transform: scale(0.86); }
+    50% { opacity: 1; transform: scale(1.12); }
+}
+
+@keyframes startHeartBeat {
+    0%, 100% { transform: scale(0.93); }
+    45% { transform: scale(1.16); }
+    62% { transform: scale(1.03); }
+}
+
+@keyframes sparkTwinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.7) rotate(0); }
+    50% { opacity: 1; transform: scale(1.18) rotate(24deg); }
+}
+
+@keyframes messagePulse {
+    0%, 100% { opacity: 0.52; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.18); }
+}
+
+@keyframes heartWander {
+    from { transform: translate(-50%, -50%) translate3d(0, 0, 0); }
+    to { transform: translate(-50%, -50%) translate3d(var(--drift-x), var(--drift-y), 0); }
+}
+
+@keyframes trapWander {
+    from { transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(-8deg); }
+    to { transform: translate(-50%, -50%) translate3d(var(--drift-x), var(--drift-y), 0) rotate(8deg); }
+}
+
+@keyframes targetAura {
+    0%, 100% { opacity: 0.38; transform: scale(0.8); }
+    50% { opacity: 0.92; transform: scale(1.08); }
+}
+
+@keyframes targetHeartBeat {
+    from { transform: scale(0.92); }
+    to { transform: scale(1.14); }
+}
+
+@keyframes targetSpark {
+    0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0); }
+    50% { opacity: 1; transform: scale(1.12) rotate(25deg); }
+}
+
+@keyframes trapAura {
+    from { opacity: 0.45; transform: scale(0.88); }
+    to { opacity: 0.9; transform: scale(1.08); }
+}
+
+@keyframes targetCaught {
+    to { opacity: 0; transform: translate(-50%, -50%) scale(2.1) rotate(18deg); }
+}
+
+@keyframes feedbackRise {
+    0% { opacity: 0; transform: translate(-50%, -10%) scale(0.82); }
+    18% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -185%) scale(1.08); }
+}
+
+@keyframes statWarning {
+    from { transform: scale(1); }
+    to { transform: scale(1.025); }
+}
+
+@keyframes pressureGlow {
+    from { box-shadow: 0 28px 80px rgba(11, 3, 22, 0.35), inset 0 0 0 rgba(244, 63, 94, 0); }
+    to { box-shadow: 0 28px 80px rgba(11, 3, 22, 0.35), inset 0 0 54px rgba(244, 63, 94, 0.11); }
+}
+
+@keyframes arenaComplete {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.015); box-shadow: 0 0 0 1px rgba(253, 230, 138, 0.25), 0 30px 86px rgba(91, 23, 78, 0.38); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 640px) {
+    .game-board-shell {
+        margin-top: 11px;
+    }
+
+    .heart-challenge-topline {
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 7px;
+        flex-direction: column;
+    }
+
+    .challenge-rules {
+        gap: 9px;
+        font-size: 9px;
+    }
+
+    .hearts-board {
+        height: min(62vh, 470px);
+        min-height: 402px;
+        border-radius: 25px;
+    }
+
+    .heart-hud {
+        top: 11px;
+        right: 11px;
+        left: 11px;
+        gap: 6px;
+    }
+
+    .heart-stat {
+        gap: 5px;
+        border-radius: 13px;
+        padding: 8px 7px;
+    }
+
+    .heart-stat-icon {
+        display: none;
+    }
+
+    .heart-stat-copy span {
+        font-size: 7px;
+        letter-spacing: 0.12em;
+    }
+
+    .heart-stat-copy strong {
+        font-size: 16px;
+    }
+
+    .heart-progress-track {
+        top: 67px;
+        right: 14px;
+        left: 14px;
+    }
+
+    .heart-play-area {
+        inset: 74px 0 87px;
+    }
+
+    .arena-center-visual {
+        width: 184px;
+        height: 184px;
+    }
+
+    .arena-ring.ring-three {
+        width: 178px;
+        height: 178px;
+    }
+
+    .arena-ring.ring-two {
+        width: 128px;
+        height: 128px;
+    }
+
+    .heart-start-panel {
+        width: min(calc(100% - 26px), 355px);
+        padding: 16px 16px;
+        border-radius: 21px;
+    }
+
+    .start-heart-visual {
+        width: 54px;
+        height: 54px;
+        margin-bottom: 6px;
+    }
+
+    .start-heart-halo {
+        width: 54px;
+        height: 54px;
+    }
+
+    .start-heart-core {
+        font-size: 27px;
+    }
+
+    .heart-start-panel h2 {
+        font-size: 21px;
+    }
+
+    .heart-start-panel p:not(.heart-start-kicker) {
+        font-size: 11px;
+    }
+
+    .heart-bottom-panel {
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+        grid-template-columns: 1fr;
+    }
+
+    .heart-mini-tip {
+        display: none;
+    }
+
+    .heart-message-wrap {
+        border-radius: 13px;
+        padding: 8px 9px;
+    }
+
+    .heart-game-message {
+        font-size: 10px;
     }
 }
 
 /* =========================================================
-   EXTRA SPACING UNTUK HALAMAN PEMBUKA
+   CHAPTER 01 · CENTERED COMPACT CHALLENGE PROGRESS BAR
+   The challenge progress line is intentionally shorter and
+   centered so it no longer visually merges with the HUD edge.
    ========================================================= */
-
-.chapter {
-    padding-top: 28px;
-    padding-bottom: 32px;
+.heart-progress-track {
+    top: 88px;
+    right: auto;
+    left: 50%;
+    width: min(52%, 360px);
+    height: 5px;
+    padding: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    background: rgba(255, 255, 255, 0.055);
+    box-shadow: 0 6px 18px rgba(12, 3, 23, 0.2);
+    transform: translateX(-50%);
 }
 
-/* Badge: A Private Little Universe */
-.chapter .pill {
-    margin-bottom: clamp(14px, 2vh, 22px);
+.heart-progress-track span {
+    box-shadow: 0 0 12px rgba(217, 70, 239, 0.45);
 }
 
-/* Judul Utama */
-.chapter-title {
+.heart-play-area {
+    inset: 105px 0 82px;
+}
+
+@media (max-width: 640px) {
+    .heart-progress-track {
+        top: 82px;
+        width: min(58%, 290px);
+    }
+
+    .heart-play-area {
+        inset: 98px 0 77px;
+    }
+}
+
+/* =========================================================
+   COVER HERO · WOW UPGRADE
+   ========================================================= */
+.cover-layout {
+    display: grid;
+    width: min(100%, 1040px);
+    margin-top: 1.05rem;
+    grid-template-columns: minmax(0, 1.06fr) minmax(300px, 0.94fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+.cover-main,
+.cover-side {
+    min-width: 0;
+}
+
+.intro-card-enhanced {
+    margin: 0;
+}
+
+.cover-chip-row,
+.cover-action-row,
+.promise-points,
+.mini-sticker-row,
+.music-bars {
+    display: flex;
+    align-items: center;
+}
+
+.cover-chip-row {
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.cover-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid rgba(255, 228, 236, 0.12);
+    border-radius: 999px;
+    padding: 0.58rem 0.82rem;
+    background: rgba(255, 255, 255, 0.055);
+    color: rgba(255, 247, 251, 0.8);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.promise-card {
+    display: grid;
+    gap: 16px;
+    margin-top: 15px;
+    padding: 18px 20px;
+    text-align: left;
+}
+
+.promise-kicker,
+.music-mini-label {
+    display: inline-block;
+    color: rgba(254, 205, 211, 0.72);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.promise-copy h3 {
+    margin: 9px 0 7px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.16rem, 2vw, 1.42rem);
+    line-height: 1.18;
+}
+
+.promise-copy p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.promise-points {
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.promise-points span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0.72rem 0.82rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.045);
+    color: rgba(255, 247, 251, 0.76);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.promise-points b {
+    display: grid;
+    width: 26px;
+    height: 26px;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.86), rgba(217, 70, 239, 0.78));
+    color: white;
+    font-size: 12px;
+}
+
+.cover-action-row {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 17px;
+}
+
+.cover-action-row .primary-btn,
+.cover-action-row .secondary-btn {
     margin-top: 0;
-    margin-bottom: 0;
 }
 
-/* Deskripsi Di Bawah Judul */
-.chapter-description {
-    margin-top: clamp(16px, 2.2vh, 24px);
-    line-height: 1.85;
+.secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 0.9rem;
+    border: 1px solid rgba(255, 228, 236, 0.2);
+    border-radius: 999px;
+    padding: 0.64rem 1.18rem;
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 247, 251, 0.9);
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 14px 34px rgba(16, 6, 28, 0.18);
+    backdrop-filter: blur(16px);
+    transition: 0.2s ease;
 }
 
-/* Kotak Hadiah */
-.intro-card {
-    width: min(100%, 680px);
-    gap: 20px;
-    margin-top: clamp(24px, 3.2vh, 38px);
-    padding: 20px 22px;
+.secondary-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.11);
 }
 
-/* Jarak Antarbaris Di Dalam Kotak Hadiah */
-.intro-copy p {
-    line-height: 1.75;
+.secondary-btn span {
+    font-size: 14px;
+    line-height: 1;
 }
 
-.intro-copy .micro-label {
-    margin-bottom: 9px;
+.cover-visual {
+    position: relative;
+    min-height: 480px;
+    padding: 24px;
+    overflow: hidden;
+    text-align: left;
 }
 
-/* Tombol Let's Start */
-.primary-btn {
-    margin-top: clamp(26px, 3.2vh, 38px);
-    padding: 14px 24px;
+.visual-glow {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(36px);
+    opacity: 0.58;
+    pointer-events: none;
 }
 
-/* Tulisan Use Headphones */
-.small-note {
-    margin-top: clamp(17px, 2.3vh, 26px);
+.visual-glow-one {
+    top: 10%;
+    left: 2%;
+    width: 160px;
+    height: 160px;
+    background: rgba(251, 113, 133, 0.24);
 }
 
-/* Batasi Lebar Konten Cover Agar Tidak Terlalu Melebar */
-.cover-content,
-.chapter-content {
-    max-width: 980px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
+.visual-glow-two {
+    right: -7%;
+    bottom: 4%;
+    width: 220px;
+    height: 220px;
+    background: rgba(167, 139, 250, 0.22);
 }
 
-.cover-stage .chapter-inner,
-.chapter .chapter-inner {
-    max-width: 960px;
-    margin: 0 auto;
+.hero-badge {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.56rem 0.82rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 14px 30px rgba(14, 4, 25, 0.22);
+    backdrop-filter: blur(16px);
+    color: rgba(255, 247, 251, 0.88);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.hero-badge-top {
+    top: 18px;
+    right: 18px;
+}
+
+.hero-badge-side {
+    top: 95px;
+    left: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.9), rgba(217, 70, 239, 0.8));
+    color: white;
+    font-size: 22px;
+    letter-spacing: 0;
+}
+
+.hero-avatar-wrap {
+    position: relative;
+    display: flex;
+    min-height: 255px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 16px 20px;
+}
+
+.hero-avatar-ring {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border: 1px dashed rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    animation: spinHalo 24s linear infinite;
+}
+
+.hero-avatar-ring::before,
+.hero-avatar-ring::after {
+    position: absolute;
+    border-radius: 999px;
+    content: '';
+}
+
+.hero-avatar-ring::before {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-avatar-ring::after {
+    top: 8px;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #fde68a, #fb7185);
+    box-shadow: 0 0 20px rgba(253, 230, 138, 0.55);
+    transform: translateX(-50%);
+}
+
+.hero-avatar {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 158px;
+    height: 158px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 44px;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), transparent 34%),
+        linear-gradient(135deg, rgba(251, 113, 133, 0.94), rgba(167, 139, 250, 0.88));
+    box-shadow:
+        0 24px 50px rgba(18, 4, 29, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    color: white;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 58px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.hero-avatar-caption {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    margin-top: 18px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     text-align: center;
 }
 
-/* =========================================================
-   Global Font Size & Spacing Adjustments
-   ========================================================= */
-
-/* Semua section container */
-main section {
-    padding-top: 1.8rem;
-    padding-bottom: 1.8rem;
+.hero-avatar-caption strong {
+    font-size: 19px;
 }
 
-/* Small label di atas judul */
-.chapter .pill {
-    font-size: 0.7rem;
-    padding: 0.44em 0.85em;
-    margin-bottom: 1.2rem;
+.hero-avatar-caption span {
+    max-width: 250px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
 }
 
-/* Judul utama setiap stage */
-.chapter-title {
-    font-size: clamp(1.95rem, 6vw, 3.2rem) !important;
-    line-height: 1.15;
-    margin-bottom: 0.6rem;
+.music-mini-card,
+.surprise-mini-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 16px 17px;
 }
 
-/* Deskripsi ringkas di bawah judul */
-.chapter-description {
-    font-size: 0.88rem;
-    line-height: 1.52;
-    margin-top: 0.6rem;
-    margin-bottom: 1.5rem;
+.music-mini-card {
+    margin-top: 8px;
 }
 
-/* Cards container */
-[class*="GlassCard"],
-.intro-card,
-.quiz-options,
-.memory-cards {
-    margin-top: 1rem;
-    margin-bottom: 1.4rem;
+.music-mini-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
 }
 
-/* Headline bar (progress step) */
-header .pill {
-    font-size: 0.62rem;
-    padding: 0.36em 0.7em;
+.music-bars {
+    gap: 7px;
+    margin-top: 12px;
+    min-height: 36px;
+    justify-content: flex-start;
 }
 
-/* Tombol utama */
-.primary-btn {
-    font-size: 0.9rem;
-    padding: 0.68rem 1.6rem;
-    margin-top: 1.4rem;
+.music-bars span {
+    width: 7px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #fde68a, #fb7185);
+    animation: equalize 1.15s ease-in-out infinite;
 }
 
-/* Small note (use headphones / ui hints) */
-.small-note {
-    margin-top: 1rem;
-    font-size: 0.72rem;
-    letter-spacing: .08em;
+.music-bars span:nth-child(1) { height: 28px; animation-delay: 0s; }
+.music-bars span:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+.music-bars span:nth-child(3) { height: 33px; animation-delay: 0.4s; }
+.music-bars span:nth-child(4) { height: 22px; animation-delay: 0.15s; }
+
+.surprise-mini-card {
+    margin-top: 14px;
 }
 
-/* Quiz / Memory screens */
-.quiz-option {
-    padding: 0.87rem 1.3rem;
-    font-size: 0.91rem;
-}
-.memory-cards button {
-    height: 5.6rem;
-}
-
-/* Reply card */
-.quiz-reply {
-    padding: 1rem 1.4rem;
-    margin-top: 1.4rem;
+.surprise-mini-card ul {
+    display: grid;
+    gap: 9px;
+    margin: 11px 0 0;
+    padding: 0;
+    list-style: none;
 }
 
-/* Arrow / chapter tag bar */
-.chapter .pill {
-    letter-spacing: .12em;
+.surprise-mini-card li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 247, 251, 0.84);
+    font-size: 13px;
+    font-weight: 600;
 }
 
-/* Smaller hearts collection UI */
-.hearts-collected-badge {
-    padding: 0.36rem .88rem;
-    font-size: 0.82rem;
+.surprise-mini-card li span {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(254, 205, 211, 0.94);
+    font-size: 12px;
 }
 
-/* Meter & touch area */
-.love-meter button {
-    width: 4.8rem;
-    height: 4.8rem;
+.mini-sticker-row {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
 }
 
-/* Letter pages text */
-.letter-page-title {
-    font-size: clamp(1.98rem, 5.2vw, 2.9rem);
-    margin-bottom: 0.75rem;
-}
-.letter-page-body {
-    font-size: 0.93rem;
-    line-height: 1.62;
-    margin-bottom: 1rem;
-}
-
-/* ======================================================
-   Compact UI Mode — Smaller & Tighter But Still Readable
-   Applies To All Chapters (1–Final)
-   ====================================================== */
-
-/* Compact Section Padding */
-main section {
-    padding-top: 1.4rem !important;
-    padding-bottom: 1.4rem !important;
+.mini-sticker-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0.56rem 0.7rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 247, 251, 0.74);
+    font-size: 12px;
+    font-weight: 700;
 }
 
-/* Badge / Progress */
-.chapter .pill {
-    font-size: 0.62rem !important;
-    padding: 0.3em 0.75em !important;
-    margin-bottom: 0.85rem !important;
+@keyframes spinHalo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* Main Title */
-.chapter-title {
-    font-size: clamp(1.85rem, 4.8vw, 2.8rem) !important;
-    line-height: 1.12 !important;
-    margin-bottom: 0.5rem !important;
+@keyframes equalize {
+    0%, 100% { transform: scaleY(0.65); opacity: 0.55; }
+    50% { transform: scaleY(1.12); opacity: 1; }
 }
 
-/* Subtitle / Description */
-.chapter-description {
-    font-size: 0.82rem !important;
-    line-height: 1.46 !important;
-    margin-top: 0.5rem !important;
-    margin-bottom: 1.15rem !important;
-}
+@media (max-width: 900px) {
+    .cover-layout {
+        grid-template-columns: 1fr;
+    }
 
-/* Hearts Container & Other Cards */
-[class*="GlassCard"],
-.intro-card,
-.memory-cards,
-.quiz-options {
-    margin-top: 0.85rem !important;
-    margin-bottom: 1.2rem !important;
-}
-
-/* Hearts Collected Badge */
-.hearts-collected-badge {
-    padding: 0.32rem 0.74rem !important;
-    font-size: 0.78rem !important;
-}
-
-/* Quiz / Options */
-.quiz-option {
-    padding: 0.78rem 1.2rem !important;
-    font-size: 0.88rem !important;
-}
-
-/* Reply Cards */
-.quiz-reply {
-    padding: 0.92rem 1.28rem !important;
-    margin-top: 1.1rem !important;
-}
-.quiz-reply-label {
-    font-size: 0.82rem !important;
-}
-.quiz-reply-content p {
-    font-size: 0.88rem !important;
-    line-height: 1.54 !important;
-}
-
-/* Letters Pages */
-.letter-page-title {
-    font-size: clamp(1.78rem, 4.2vw, 2.6rem) !important;
-    margin-bottom: 0.62rem !important;
-}
-.letter-page-body {
-    font-size: 0.88rem !important;
-    line-height: 1.58 !important;
-    margin-bottom: 0.92rem !important;
-}
-
-/* Buttons */
-.primary-btn {
-    font-size: 0.88rem !important;
-    padding: 0.68rem 1.48rem !important;
-    margin-top: 1.1rem !important;
-}
-
-/* Small hints / text */
-.small-note {
-    font-size: 0.68rem !important;
-    margin-top: 0.9rem !important;
-}
-
-/* Touch area heart meter */
-.love-meter button {
-    width: 4.6rem !important;
-    height: 4.6rem !important;
-}
-
-/* Disable extreme height spacing */
-@media (max-height: 780px) {
-    main section {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
+    .cover-visual {
+        min-height: 440px;
     }
 }
 
-/* =========================================================
-   ULTRA COMPACT UI STYLE — SUPER PADAT
-   EFFECTS ALL CHAPTERS
-   ========================================================= */
-
-/* container section */
-main section {
-    padding-top: 0.8rem !important;
-    padding-bottom: 0.8rem !important;
-}
-
-/* badge progress */
-.chapter .pill {
-    font-size: 0.56rem !important;
-    padding: 0.24em 0.7em !important;
-    margin-bottom: 0.6rem !important;
-}
-
-/* main title smaller */
-.chapter-title {
-    font-size: clamp(1.7rem, 4.2vw, 2.4rem) !important;
-    line-height: 1.08 !important;
-    margin-bottom: 0.36rem !important;
-}
-
-/* subtitle description */
-.chapter-description {
-    font-size: 0.78rem !important;
-    line-height: 1.32 !important;
-    margin-top: 0.32rem !important;
-    margin-bottom: 1rem !important;
-}
-
-/* hearts card container */
-[class*="GlassCard"],
-.intro-card,
-.memory-cards,
-.quiz-options {
-    margin-top: 0.7rem !important;
-    margin-bottom: 1rem !important;
-}
-
-/* hearts count badge */
-.hearts-collected-badge {
-    font-size: 0.74rem !important;
-    padding: 0.28rem 0.64rem !important;
-}
-
-/* quiz options */
-.quiz-option {
-    font-size: 0.84rem !important;
-    padding: 0.64rem 1.0rem !important;
-}
-
-/* quiz reply card */
-.quiz-reply {
-    padding: 0.84rem 1.1rem !important;
-    margin-top: 1rem !important;
-}
-.quiz-reply-label {
-    font-size: 0.78rem !important;
-}
-.quiz-reply-content p {
-    font-size: 0.82rem !important;
-    line-height: 1.42 !important;
-}
-
-/* letter pages */
-.letter-page-title {
-    font-size: clamp(1.62rem, 3.8vw, 2.2rem) !important;
-    margin-bottom: 0.5rem !important;
-}
-.letter-page-body {
-    font-size: 0.82rem !important;
-    line-height: 1.48 !important;
-    margin-bottom: 0.8rem !important;
-}
-
-/* primary button */
-.primary-btn {
-    font-size: 0.82rem !important;
-    padding: 0.64rem 1.32rem !important;
-    margin-top: 0.9rem !important;
-}
-
-/* hints & small text */
-.small-note {
-    font-size: 0.62rem !important;
-    margin-top: 0.8rem !important;
-}
-
-/* love meter touch */
-.love-meter button {
-    width: 4.2rem !important;
-    height: 4.2rem !important;
-}
-
-/* compact for smaller screens */
 @media (max-width: 640px) {
-    .chapter-title {
-        font-size: clamp(1.48rem, 3.6vw, 2.0rem) !important;
+    .cover-chip-row,
+    .cover-action-row,
+    .promise-points,
+    .mini-sticker-row {
+        justify-content: center;
     }
-    .chapter-description {
-        font-size: 0.74rem !important;
+
+    .promise-card,
+    .music-mini-card,
+    .surprise-mini-card {
+        text-align: left;
+    }
+
+    .cover-visual {
+        min-height: 412px;
+        padding: 20px;
+    }
+
+    .hero-avatar-wrap {
+        min-height: 224px;
+        padding-top: 20px;
+    }
+
+    .hero-avatar-ring {
+        width: 198px;
+        height: 198px;
+    }
+
+    .hero-avatar {
+        width: 138px;
+        height: 138px;
+        border-radius: 36px;
+        font-size: 52px;
+    }
+
+    .hero-badge-side {
+        top: 82px;
+        width: 50px;
+        height: 50px;
+        font-size: 19px;
     }
 }
 
-/* ENABLE NORMAL PAGE SCROLL */
-html, body {
-    height: auto !important;
-    overflow-y: auto !important;
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
-main section {
-    min-height: auto !important;
-    padding-top: 1.2rem !important;
-    padding-bottom: 1.2rem !important;
+
+/* =========================================================
+   MULTI-SONG PLAYLIST CONTROLS
+   ========================================================= */
+.music-mini-head,
+.cover-music-controls,
+.playlist-controls,
+.playlist-modal-header,
+.playlist-track,
+.playlist-track-copy {
+    display: flex;
+    align-items: center;
 }
 
-html, body {
-    height: 100% !important;
-    overflow-y: scroll !important;
-    scroll-behavior: smooth !important;
+.music-mini-head,
+.playlist-modal-header {
+    justify-content: space-between;
+    gap: 14px;
 }
 
-main {
-    scroll-snap-type: y mandatory;
+.music-mini-head .music-bars {
+    flex: 0 0 auto;
+    margin-top: 0;
 }
 
-main section {
-    scroll-snap-align: start;
-    min-height: 100vh;
+.track-select-label {
+    display: block;
+    margin-top: 15px;
+    color: rgba(255, 228, 236, 0.58);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.track-select {
+    width: 100%;
+    margin-top: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 13px;
+    padding: 0.68rem 0.76rem;
+    background: rgba(16, 6, 28, 0.42);
+    color: rgba(255, 247, 251, 0.9);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    outline: none;
+}
+
+.track-select:focus {
+    border-color: rgba(253, 164, 175, 0.58);
+    box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.11);
+}
+
+.track-select option {
+    background: #241232;
+    color: #fff7fb;
+}
+
+.cover-music-controls,
+.playlist-controls {
+    justify-content: center;
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.playlist-control-btn {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid rgba(255, 228, 236, 0.19);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.075);
+    color: rgba(255, 247, 251, 0.92);
+    font-size: 20px;
+    font-weight: 700;
+    transition: 0.18s ease;
+}
+
+.playlist-control-btn:hover {
+    border-color: rgba(253, 164, 175, 0.48);
+    background: rgba(253, 164, 175, 0.15);
+    transform: translateY(-2px);
+}
+
+.playlist-control-btn.is-primary {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, #f43f5e, #d946ef);
+    color: white;
+    box-shadow: 0 10px 28px rgba(80, 18, 82, 0.28);
+    font-size: 15px;
+}
+
+.playlist-modal {
+    width: min(100%, 520px);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 22px;
+    background: rgba(36, 17, 52, 0.97);
+    box-shadow: var(--shadow);
+}
+
+.playlist-modal-header h2 {
+    margin: 7px 0 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 25px;
+    line-height: 1.15;
+}
+
+.playlist-now-playing {
+    margin-top: 17px;
+    padding: 17px;
+    text-align: center;
+}
+
+.playlist-now-playing strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.playlist-track-list {
+    display: grid;
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.playlist-track {
+    width: 100%;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 16px;
+    padding: 11px 12px;
+    background: rgba(255, 255, 255, 0.055);
+    color: rgba(255, 247, 251, 0.9);
+    text-align: left;
+    transition: 0.18s ease;
+}
+
+.playlist-track:hover,
+.playlist-track.is-active {
+    border-color: rgba(253, 164, 175, 0.44);
+    background: rgba(253, 164, 175, 0.12);
+    transform: translateY(-1px);
+}
+
+.playlist-track-number {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.075);
+    color: rgba(254, 205, 211, 0.84);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.playlist-track-copy {
+    min-width: 0;
+    flex: 1;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.playlist-track-copy strong,
+.playlist-track-copy small {
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.playlist-track-copy strong {
+    font-size: 13px;
+}
+
+.playlist-track-copy small {
+    color: rgba(255, 247, 251, 0.52);
+    font-size: 10px;
+}
+
+.playlist-track-symbol {
+    color: rgba(254, 205, 211, 0.9);
+    font-size: 18px;
+}
+
+.playlist-note {
+    margin: 14px 0 0;
+    color: rgba(255, 247, 251, 0.55);
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .playlist-modal {
+        padding: 18px;
+    }
+
+    .playlist-modal-header h2 {
+        font-size: 22px;
+    }
+
+    .playlist-track-copy strong {
+        font-size: 12px;
+    }
+}
+
+
+/* Decorative Hero Placeholder Without Initials */
+.hero-avatar-empty {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
